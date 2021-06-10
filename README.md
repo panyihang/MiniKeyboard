@@ -20,7 +20,7 @@
 
 #### （1）一个16P的TYPE-C接口；
 
-#### （2）18颗机械轴；
+#### （2）17颗机械轴；
 
 #### （3）两颗LED,用于指示当前的模式；
 
@@ -80,12 +80,12 @@
 
 ### 7.2 软件滤波
 
-#### 考虑到了可能出现的噪音，进行一次软件滤波（这里有点小bug,后续修改
+#### 考虑到了可能出现的噪音，进行一次滤波和按键模拟
 
 ![深度截图_选择区域_20210529003253.png](https://image.lceda.cn/pullimage/mDFkLS6wtf0Xn1lbqIDA8hPQ8PnLniaqL1obmhHU.png)
 ![深度截图_选择区域_20210529003755.png](https://image.lceda.cn/pullimage/Sz0zf7eAY4FadctQkoqCTZi9bmvoYyi9pJu3cQeS.png)
 
-### 7.3 模式切换
+### 7.3 模式切换 「已删除」
 
 #### 这边的模式切换采用的是对数组进行偏移来实现的
 
