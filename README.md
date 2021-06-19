@@ -1,8 +1,10 @@
 # 多功能小键盘
+
 ### 固件开源地址： [https://github.com/panyihang/MiniKeyboard](https://github.com/panyihang/MiniKeyboard)
+
 ## 1 简介
 
-#### 使用ch552单片机，使用ch55xarduino实现USB HID，不仅完全兼容普通的数字小键盘，还有更多扩展功能。
+#### 使用ch55x (ch551 / ch552 / ch554)单片机，使用ch55xarduino实现USB HID，不仅完全兼容普通的数字小键盘，还有更多扩展功能。
 
 ## 2 知识点
 
@@ -70,8 +72,6 @@
 
 ## 7.代码
 
-#### 本项目是使用Arduino框架，编译器使用的是社区维护的CH554_SDCC，有可能会出一些蜜汁BUG
-
 ### 7.1 按键扫描的思路
 
 #### 根据按键阵列，我们先在A1-A5中依次拉低这些IO，每拉低一个IO，就把A6-A9配置为输入上拉模式，依次扫描记录
@@ -85,8 +85,60 @@
 ![深度截图_选择区域_20210529003253.png](https://image.lceda.cn/pullimage/mDFkLS6wtf0Xn1lbqIDA8hPQ8PnLniaqL1obmhHU.png)
 ![深度截图_选择区域_20210529003755.png](https://image.lceda.cn/pullimage/Sz0zf7eAY4FadctQkoqCTZi9bmvoYyi9pJu3cQeS.png)
 
-### 7.3 模式切换 「已删除」
+### 7.3 模式切换（已删除）
 
 #### 这边的模式切换采用的是对数组进行偏移来实现的
 
 ![深度截图_选择区域_20210529003831.png](https://image.lceda.cn/pullimage/2LUhk6QLqnQ8OUI8PwLRlX955MLHJE136Wo0FCCc.png)
+
+## 8.固件现存的问题
+
+* ch55xarduino疑似无法将引脚配置为高阻态，pinMode设为INPUT，实际为高电平，无法实现两个LED同时熄灭，不影响使用
+
+### 由于模式切换导致了一些问题，现已删除模式切换功能，以下BUG均解决
+
+* 在已经按下其他按键的情况下切换模式，会导致OS认为该按键一直被按下，按下任意键即可恢复
+* 按键矩阵的(A1,A7)按下第一次扫描后会被识别为(A1,A6)，该问题较为严重，建议暂时屏蔽掉这个按键，原因还没查出来
+
+# 9.外观
+
+![IMG_20210530_164039.jpg](https://image.lceda.cn/pullimage/1Z4TaLq18ibr7d9AfoAaq3n8IRxRvgrEfoqre5WO.jpeg)
+
+![IMG_20210530_163805.jpg](https://image.lceda.cn/pullimage/HDKuAUA0n76fAEmHoXIIvAFA9mrKF3CeOTD7Hx1F.jpeg)
+
+### 底座使用另一块板子用热熔胶粘在一起
+
+### <del>考虑到隔壁jp出了白嫖3d打印的活动，后续可能会画外壳</del>
+
+2021/6/15 隔壁玩不起了，没法白嫖3d打印了，外壳就不画了
+
+# 10.踩过的坑
+
+### 0.0.9的ch55xrduino linux版本有一处路径异常（或者是打包有遗漏），编译报错找不到avr-objcopy，Arch系解决方法如下
+
+`sudo pacman -S avr-gcc`
+
+`vim /home/[YOUR-USER-NAME]/.arduino15/packages/CH55xDuino/hardware/mcs51/0.0.9/platform.txt`
+
+第41行
+
+`compiler.tools.path=xxxxxxxxxxxxx`
+
+改为
+
+`compiler.tools.path=/usr/bin`
+
+保存退出即可
+
+### window版没法用自带的下载工具烧录程序，好像是权限的问题？反正没有解决，可以导出hex然后用官方给的烧录软件烧录
+
+- - -
+
+<br>
+<br>
+<br>
+最后吐槽两句，黑轴的手感是真的不行，到底是哪个b说黑轴适合打游戏
+
+原神官服54级老咸鱼了，UID:163114852，欢迎来骚扰~
+
+- - -
