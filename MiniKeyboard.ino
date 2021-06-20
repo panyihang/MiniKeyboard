@@ -1,8 +1,8 @@
 #include "src/userUsbHidKeyboard/USBHIDKeyboard.h"
-#define gameMode true
+#define gameMode false
 
 #if (gameMode)
-signed char littetList[20] = {'h', 'b', 'm', 0x1B, 'q', 'w', 'e',
+signed char littetList[20] = {'h', 'b', 'm', 0xB1, 'q', 'w', 'e',
                               'f', 'a', 's', 'd', 0x20, '1', '2',
                               '3', 0x20, 0x82, 0x20, '4'};
 #else
@@ -23,7 +23,7 @@ void setup()
 {
   USBInit();
   pinMode(34, OUTPUT);
-  digitalWrite(34, true);
+  digitalWrite(34, 0);
 }
 
 void loop()
