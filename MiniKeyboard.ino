@@ -1,5 +1,5 @@
 #include "src/userUsbHidKeyboard/USBHIDKeyboard.h"
-#define gameMode false
+#define gameMode true
 
 #if (gameMode)
 signed char littetList[20] = {'h', 'b', 'm', 0x1B, 'q', 'w', 'e',
